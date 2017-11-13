@@ -17,6 +17,23 @@ class ViewController: UIViewController, UITableViewDataSource {
         // Do any additional setup after loading the view, typically from a nib.
         tableView.dataSource = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+        super.viewWillAppear(animated)
+    }
+    
+    @IBAction func unwindSaveNewToDo(unwindSegue: UIStoryboardSegue) {
+        if let addTaskVC = unwindSegue.source as? AddTaskViewController {
+            if addTaskVC.newTask.count != 0 {
+                toDoList.append(addTaskVC.newTask)
+            }
+        }
+    }
+    
+    @IBAction func unwindCancelNewToDo(unwindSegue: UIStoryboardSegue) {
+
+    }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
